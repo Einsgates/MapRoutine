@@ -3,8 +3,8 @@ package MR;
 public class indexPQ<Key extends Comparable<Key>> {
 	private int maxN;
 	private int n;
-	private int[] pq;   // key的索引
-	private int[] qp;   // key在堆中的位置
+	private int[] pq;   // index of key
+	private int[] qp;   // the position of key in the heap
 	private Key[] keys;
 
 	public indexPQ(int maxN) {

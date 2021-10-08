@@ -37,7 +37,7 @@ class DijkstraUndirectedSP {
 		mGraph = G;
 		for (Edge e : G.edges()) {
 			if (e.weight() < 0)
-				throw new IllegalArgumentException("权重不能为负数！");
+				throw new IllegalArgumentException("Weights cannot be a negative number!");
 		}
 		distTo = new double[G.V()];
 		edgeTo = new Edge[G.V()];
@@ -60,8 +60,8 @@ class DijkstraUndirectedSP {
 	private void relax(Edge e, int v) {
 		int w = e.other(v);
 		double weight = distTo[v] + e.weight();
-		// 优化①：A*算法
-		// 将 d[w]更新为 d[v] + 从 v 到 w 的距离 + 从 w 到 d 的欧式距离 − 从 v 到 d 的欧式距离
+		// 1: A* Algorithm
+		// Update d[w] to d[v] + dist(v,w) + dist(w,d) - dist(v,d)
 //		double weight = distTo[v] + e.weight() + point2DS[v].distanceTo(point2DS[to]) - point2DS[w].distanceTo(point2DS[to]) ;
 		if (distTo[w] > weight) {
 			distTo[w] = weight;
@@ -78,7 +78,7 @@ class DijkstraUndirectedSP {
 	public boolean hasPathTo(int v) {
 		while (!pq.isEmpty()) {
 			int x = pq.delMin();
-			// 优化②：找出目标节点就退出循环
+			// 2: When target node is found, quit the loop 
 			if (x == v) {
 				return true;
 			}
@@ -147,14 +147,14 @@ public class MapRouting {
 			msp.setTo(to);
 			boolean boo = msp.hasPathTo(to);
 			if (boo) {
-				StdOut.println("最短路径为：");
+				StdOut.println("The shortest path is: ");
 				for (Edge e : msp.pathTo(to)) {
 					StdOut.println(e + " ");
 				}
-				StdOut.println(from + " --> " + to + "的最短路径长度为：" + msp.distTo(to));
+				StdOut.println(from + " --> " + to + "the shortest path is ：" + msp.distTo(to));
 				StdOut.println();
 			} else {
-				StdOut.println("不存在这样一条路径");
+				StdOut.println("No path exists");
 			}
 		}
 	}
